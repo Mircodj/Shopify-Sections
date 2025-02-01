@@ -1,0 +1,171 @@
+{% schema %}
+{
+  "name": "Centered Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Upload an image"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Settings"
+    },
+    {
+      "type": "range",
+      "id": "width_desktop",
+      "label": "Width Desktop (%)",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "min_width_desktop",
+      "label": "Min Width Desktop (px)",
+      "min": 10,
+      "max": 1000,
+      "step": 10,
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "margin_top_desktop",
+      "label": "Margin Top (px)",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_desktop",
+      "label": "Margin Bottom (px)",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_left_desktop",
+      "label": "Margin Left (px)",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_right_desktop",
+      "label": "Margin Right (px)",
+      "min": 0,
+      "max": 500,
+       "step": 5,
+       "default": 10
+     },
+     {
+       "type": "header",
+       "content": "Mobile Settings"
+     },
+     {
+       "type": "range",
+       "id": "width_mobile",
+       "label": "Width Mobile (%)",
+       "min": 10,
+       "max": 100,
+       "step": 1,
+       "default": 20
+     },
+     {
+       "type": "range",
+       "id": "min_width_mobile",
+       "label": "Min Width Mobile (px)",
+       "min": 10,
+       "max": 1000,
+       "step": 10,
+       "default": 200
+     },
+     {
+       "type": "range",
+       "id": "margin_top_mobile",
+       "label": "Margin Top (px)",
+       "min": 0,
+       "max": 500,
+       "step": 5,
+       "default": 10
+     },
+     {
+       "type": "range",
+       "id": "margin_bottom_mobile",
+       "label": "Margin Bottom (px)",
+       "min": 0,
+       "max": 500,
+       "step": 5,
+       "default": 10
+     },
+     {
+       "type": "range",
+       "id": "margin_left_mobile",
+       "label": "Margin Left (px)",
+       "min": 0,
+       "max": 500,
+       "step": 5,
+       "default": 10
+     },
+     {
+       "type": "range",
+       "id": "margin_right_mobile",
+       "label": "Margin Right (px)",
+       "min": 0,
+        "max": 500,
+        "step": 5,
+        "default": 10
+   }
+ ],
+   "presets": [
+     {
+        "name": "Centered Image"
+     }
+   ]
+}
+{% endschema %}
+
+<style>
+  .centered-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: auto;
+  }
+  
+  .centered-image img {
+      width: {{ section.settings.width_desktop }}%;
+      min-width: {{ section.settings.min_width_desktop }}px;
+      margin-top: {{ section.settings.margin_top_desktop }}px; 
+      margin-bottom: {{ section.settings.margin_bottom_desktop }}px; 
+      margin-left: {{ section.settings.margin_left_desktop }}px; 
+      margin-right: {{ section.settings.margin_right_desktop }}px; 
+  }
+
+  @media (max-width:600px) {
+      .centered-image img {
+          width: {{ section.settings.width_mobile }}%;
+          min-width: {{ section.settings.min_width_mobile }}px;
+          margin-top: {{ section.settings.margin_top_mobile }}px; 
+          margin-bottom: {{ section.settings.margin_bottom_mobile }}px;
+          margin-left: {{ section.settings.margin_left_mobile }}px; 
+          margin-right: {{ section.settings.margin_right_mobile }}px; 
+      }
+  }
+</style>
+
+<div class="centered-image">
+  {% if section.settings.image != blank %}
+    <img src="{{ section.settings.image | img_url: 'master' }}" alt="Centered Image">
+  {% else %}
+    <p>Upload an image in the block settings.</p>
+  {% endif %}
+</div>
